@@ -1,31 +1,25 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
-
-console.log(galleryItems);
 
  
-const galleryContainer = document.querySelector(".gallery");
+const galleryContainer = document.querySelector("div.gallery");
 
 
 
-const createList = galleryItems.map(item => {
-    //  const instance = basicLightbox.create(
-         let createList = document.createElement('li');
-    createList = `<li class="gallery__item">
-  <a
-    class="gallery__link"
-    href="${item.original}"
-    data-lightbox='${item.original}'
-  >
+ const createList = galleryItems.map(item => {
+  
+      let createListItem = document.createElement('li');
+    createListItem = `<div class="gallery__item">
+  <a class="gallery__link" href='${item.original}'>
     <img
       class="gallery__image"
-      src="${item.preview}" 
+      src="${item.preview}"
+      data-source='${item.original}'
       alt="${item.description}"
     />
   </a>
-</li>`;
+</div>`;
         
-galleryContainer.insertAdjacentHTML('afterbegin', createList);
+galleryContainer.insertAdjacentHTML('afterbegin', createListItem);
 console.log(galleryContainer);
       
 })
@@ -37,38 +31,4 @@ console.log(galleryContainer);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const newGalleryList = galleryItems.map(createList).join('');
-// galleryContainer.insertAdjacentHTML('afterbegin', createList);
-// console.log(galleryContainer);
-
-// const createGallery  =   galleryItems.map(item => {
-//         const instance = basicLightbox.create(`
-       
-//          <a href='${item.original}' data-lightbox = '${item.original}' data-title = '${item.description}' rel = 'lightbox'>
-//        <img src="${item.preview}" >
-//        <a/>
-    
-// `)
-
-//         instance.show()
-//     })
 
