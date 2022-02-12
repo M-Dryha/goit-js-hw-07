@@ -20,31 +20,57 @@ const makeGalleryItemMarkup = ({ preview, original, description }) => {
 const makeGalleryMarkup = galleryItems.map(makeGalleryItemMarkup).join('');
  galleryContainer.insertAdjacentHTML('afterbegin', makeGalleryMarkup);
 
-
+let instance;
 
 
 galleryContainer.addEventListener('click', onClick);
 
 function onClick(event) {
-
+  event.preventDefault();
+  
   if (event.target.nodeName !== 'IMG') {
     return;
-  }
-  
-  event.target.src = event.target.dataset.source;
-  event.preventDefault();
+  };
 
-  openModal( event.target.dataset.source);
+  const modalIMG = event.target.dataset.source;
+  event.target.src = modalIMG ;
+  
+
+  openModal(modalIMG);
 }
 
 function openModal(src) {
-  const instance = basicLightbox.create(`
-    <div class="modal">
-         <img src="${src}" width="1200" height="800"/>
-    </div>
-`)
 
-instance.show()
+
+ instance = basicLightbox.create(`
+   <img src="${src}"/>`,
+    {
+      onShow: instance => {
+        window.addEventListener('keydown', closeModal);
+               
+      },
+      onClose: instance => {
+        window.removeEventListener('keydown', closeModal);
+ 
+      },
+    },
+  );
+  instance.show();
+
+ 
+}
+ 
+
+
+const closeModal = (event) => {
+
+   const containerIMG = document.querySelector('.modal');
+  console.log(event)
+  
+  if (event.code === 'Escape' || event.target.nodeName === 'IMG') {
+    instance.close();
+  }
+ 
 }
 
 
@@ -52,52 +78,6 @@ instance.show()
 
 
 
-// const createList = galleryItems.map(item => {
-  
-//   let createListItem = document.createElement('li');
-//   createListItem = `<div class="gallery__item">
-//   <a class="gallery__link" href='${item.original}'>
-//     <img
-//       class="gallery__image"
-//       src="${item.preview}"
-//       data-source='${item.original}'
-//       alt="${item.description}"
-//     />
-//   </a>
-// </div>`;
-        
-//   galleryContainer.insertAdjacentHTML('afterbegin', createListItem);
-//   console.log(galleryContainer);
-      
-// }).join('');
-
-
-
-
-
-
-
-// const createList = galleryItems.map(item => {
-  
-//          let createListItem = document.createElement('li');
-//     createListItem = `<li class="gallery__item">
-//   <a
-//     class="gallery__link"
-//     href="${item.original}"
-//     data-lightbox='${item.original}'
-//   >
-//     <img
-//       class="gallery__image"
-//       src="${item.preview}" 
-//       alt="${item.description}"
-//     />
-//   </a>
-// </li>`;
-        
-// galleryContainer.insertAdjacentHTML('afterbegin', createListItem);
-// console.log(galleryContainer);
-      
-// })
 
 
 
@@ -108,20 +88,32 @@ instance.show()
 
 
 
-// const createList = galleryItems.map(item => {
 
 
-//   const instance = basicLightbox.create(`
-//     <img class="gallery__image"
-//      src="${item.preview}" 
-//      alt="${item.description}">
-// `)
 
-//   instance.show()
-//   galleryContainer.insertAdjacentHTML('afterbegin', instance);
-//   console.log(galleryContainer);
 
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
