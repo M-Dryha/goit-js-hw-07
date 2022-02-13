@@ -142,24 +142,6 @@ const closeModal = (event) => {
 
 
 
-// galleryContainer.addEventListener('click', onClick);
-
-// function onClick (event){
-// if(e)
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
