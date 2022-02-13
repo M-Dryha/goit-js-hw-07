@@ -43,7 +43,7 @@ function openModal(src) {
 
 
  instance = basicLightbox.create(`
-   <img src="${src}"/>`,
+   <img src="${src}" width: 1200/>`,
     {
       onShow: instance => {
         window.addEventListener('keydown', closeModal);
@@ -57,7 +57,6 @@ function openModal(src) {
   );
   instance.show();
 
- 
 }
  
 
