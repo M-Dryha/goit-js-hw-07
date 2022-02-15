@@ -66,7 +66,7 @@ const closeModal = (event) => {
    const containerIMG = document.querySelector('.modal');
   // console.log(event)
   
-  if (event.code === 'Escape' || event.target.nodeName === 'IMG') {
+  if (event.code === 'Escape')  {
     instance.close();
   }
  
